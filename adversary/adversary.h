@@ -56,87 +56,21 @@ inline int fenbQuerySteps(i64 L, i64 R) {
     return s;
 }
 
-inline std::pair<int, uint64_t> maxPopcountValue(uint64_t limit, int bits) {
-    int best = __builtin_popcountll(limit);
-    uint64_t bestValue = limit;
-    for (int bit = 0; bit < bits; ++bit) {
-        if ((limit & (uint64_t{1} << bit)) == 0) continue;
-        uint64_t lowerMask = bit == 0 ? 0 : ((uint64_t{1} << bit) - 1);
-        uint64_t candidate = (limit & ~((uint64_t{1} << (bit + 1)) - 1)) | lowerMask;
-        int count = __builtin_popcountll(candidate);
-        if (count > best) {
-            best = count;
-            bestValue = candidate;
-        }
-    }
-    return {best, bestValue};
-}
-
-inline std::vector<uint64_t> maxPopcountValues(uint64_t limit, int bits,
-                                                int target, size_t cap) {
-    std::vector<uint64_t> values;
-    auto visit = [&](auto&& self, int bit, bool tight, int ones,
-                     uint64_t value) -> void {
-        if (values.size() >= cap || ones > target || ones + bit + 1 < target) return;
-        if (bit < 0) {
-            if (ones == target) values.push_back(value);
-            return;
-        }
-        int limitBit = (int)((limit >> bit) & 1);
-        int high = tight ? limitBit : 1;
-        for (int take = 0; take <= high && values.size() < cap; ++take) {
-            self(self, bit - 1, tight && take == limitBit, ones + take,
-                 value | (uint64_t{(unsigned)take} << bit));
-        }
-    };
-    visit(visit, bits - 1, true, 0, 0);
-    return values;
-}
-
 inline std::vector<Query> worstQueries(size_t n, size_t count) {
     std::vector<Query> out;
     if (n < 2) return out;
     i64 N = (i64)n;
     int kmax = 63 - __builtin_clzll((uint64_t)N);
+    i64 lo = 1LL << kmax;
     int best = 0;
-
-    auto visitBlocks = [&](auto&& visit) {
-        for (int k = 0; k <= kmax; ++k) {
-            uint64_t half = uint64_t{1} << k;
-            uint64_t mask = half - 1;
-            uint64_t stride = half << 1;
-            for (uint64_t h = 0; h + half <= (uint64_t)N; h += stride) {
-                uint64_t pivot = h + half;
-                uint64_t leftLimit = std::min(mask, pivot - 1);
-                uint64_t rightLimit = std::min(mask, (uint64_t)N - pivot);
-                auto left = maxPopcountValue(leftLimit, k);
-                auto right = maxPopcountValue(rightLimit, k);
-                visit(k, pivot, leftLimit, rightLimit, left.first, right.first,
-                      1 + left.first + right.first);
-            }
-        }
-    };
-
-    visitBlocks([&](int, uint64_t, uint64_t, uint64_t, int, int, int steps) {
-        best = std::max(best, steps);
-    });
-    if (count == 0) return out;
-
-    visitBlocks([&](int k, uint64_t pivot, uint64_t leftLimit,
-                    uint64_t rightLimit, int leftBest, int rightBest, int steps) {
-        if (steps != best || out.size() >= count) return;
-        size_t remaining = count - out.size();
-        auto leftValues = maxPopcountValues(leftLimit, k, leftBest, remaining);
-        auto rightValues = maxPopcountValues(rightLimit, k, rightBest, remaining);
-        for (uint64_t left : leftValues) {
-            for (uint64_t right : rightValues) {
-                out.push_back({(size_t)(pivot - left - 1), (size_t)(pivot + right - 1)});
-                if (out.size() >= count) return;
-            }
-        }
-    });
-    return out;
+    for (i64 L = 1; L <= N; ++L)
+        for (i64 R = std::max(lo, L); R <= N; ++R) best = std::max(best, fenbQuerySteps(L, R));
+        for (i64 L = 1; L <= N && out.size() < count; ++L)
+            for (i64 R = std::max(lo, L); R <= N && out.size() < count; ++R)
+                if (fenbQuerySteps(L, R) == best) out.push_back({(size_t)(L - 1), (size_t)(R - 1)});
+                return out;
 }
+
 
 inline std::vector<i64> fibonacciCalibration(size_t n) {
     const i64 F43 = 433494437, F44 = 701408733;
