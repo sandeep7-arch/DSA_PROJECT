@@ -1,0 +1,13 @@
+# timestamp=20261117_082609Z
+# mode=gcd
+# n=1000000
+# seeds=world=4 calibration=5 workload=11
+
+[benchmark] range gcd: Euclid steps, worst observed vs derived bounds
+  case                                        bound worst seen    slack
+  random data query euclid (tight)           168.13      18.00   150.13  ok
+  random data query euclid (naive)          1847.65      18.00  1829.65  ok
+  fibonacci data query euclid (tight)        168.13      42.00   126.13  ok
+  random update euclid (tight)                83.06      48.00    35.06  ok
+
+all predictions within tolerance, all bounds held

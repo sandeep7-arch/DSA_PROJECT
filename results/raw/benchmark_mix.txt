@@ -1,0 +1,42 @@
+# timestamp=20261117_082609Z
+# mode=mix
+# n=1000000
+# seeds=world=2 calibration=3 operations=5
+
+[benchmark] update mix (every update is a decrease), width 1024
+  u        SEG_MAX ns/op  FEN_B ns/op  ORACLE ns/op   B<SEG steps  B<SEG time
+  0.0000           99.9         40.7         159.7   no           yes
+  0.0005           99.6         40.3         162.4   no           yes
+  0.0100           97.6         59.9         157.4   no           yes
+  0.1000          100.8        153.1         147.4   no           no
+  0.5000          123.2        517.5          99.1   no           no
+  1.0000          122.3        928.5          14.5   no           no
+  predicted crossover: none, B never beats SEG_MAX in steps
+  per-operation steps, predicted vs measured:
+  case                                  predicted     measured   ratio
+  u=0.0000 ORACLE                         1024.00      1024.00    1.00  ok
+  u=0.0000 SEG_MC                           10.01        10.04    1.00  ok
+  u=0.0000 SEG_MAX                          10.01        10.04    1.00  ok
+  u=0.0000 FEN_B                            11.00        11.00    1.00  ok
+  u=0.0005 ORACLE                         1023.49      1023.74    1.00  ok
+  u=0.0005 SEG_MC                           10.02        10.04    1.00  ok
+  u=0.0005 SEG_MAX                          10.02        10.04    1.00  ok
+  u=0.0005 FEN_B                            11.10        11.05    1.00  ok
+  u=0.0100 ORACLE                         1013.77      1013.00    1.00  ok
+  u=0.0100 SEG_MC                           10.11        10.15    1.00  ok
+  u=0.0100 SEG_MAX                          10.11        10.15    1.00  ok
+  u=0.0100 FEN_B                            12.99        13.14    1.01  ok
+  u=0.1000 ORACLE                          921.70       930.65    1.01  ok
+  u=0.1000 SEG_MC                           11.01        10.95    0.99  ok
+  u=0.1000 SEG_MAX                          11.01        10.95    0.99  ok
+  u=0.1000 FEN_B                            30.87        29.13    0.94  ok
+  u=0.5000 ORACLE                          512.50       513.78    1.00  ok
+  u=0.5000 SEG_MC                           15.01        15.01    1.00  ok
+  u=0.5000 SEG_MAX                          15.01        15.01    1.00  ok
+  u=0.5000 FEN_B                           110.34       110.15    1.00  ok
+  u=1.0000 ORACLE                            1.00         1.00    1.00  ok
+  u=1.0000 SEG_MC                           20.00        20.00    1.00  ok
+  u=1.0000 SEG_MAX                          20.00        20.00    1.00  ok
+  u=1.0000 FEN_B                           209.68       209.74    1.00  ok
+
+all predictions within tolerance, all bounds held

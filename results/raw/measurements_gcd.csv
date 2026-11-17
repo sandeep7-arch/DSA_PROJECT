@@ -1,0 +1,5 @@
+timestamp,mode,n,seeds,workload,structure,metric,unit,predicted,observed,ratio,status,log
+20261117_082609Z,gcd,1000000,world=4 calibration=5 workload=11,random data query euclid (tight),random,euclidean_iterations,iterations,168.13,18.00,0.10706001,ok,benchmark_gcd.txt
+20261117_082609Z,gcd,1000000,world=4 calibration=5 workload=11,random data query euclid (naive),random,euclidean_iterations,iterations,1847.65,18.00,0.0097421048,ok,benchmark_gcd.txt
+20261117_082609Z,gcd,1000000,world=4 calibration=5 workload=11,fibonacci data query euclid (tight),fibonacci,euclidean_iterations,iterations,168.13,42.00,0.2498067,ok,benchmark_gcd.txt
+20261117_082609Z,gcd,1000000,world=4 calibration=5 workload=11,random update euclid (tight),random,euclidean_iterations,iterations,83.06,48.00,0.5778955,ok,benchmark_gcd.txt

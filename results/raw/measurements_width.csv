@@ -1,0 +1,17 @@
+timestamp,mode,n,seeds,workload,structure,metric,unit,predicted,observed,ratio,status,log
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=16,ORACLE,structural_steps,steps/query,16.00,16.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=16,SEG_MC,structural_steps,steps/query,4.06,4.05,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=16,SEG_MAX,structural_steps,steps/query,4.06,4.05,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=16,FEN_B,structural_steps,steps/query,5.00,5.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1024,ORACLE,structural_steps,steps/query,1024.00,1024.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1024,SEG_MC,structural_steps,steps/query,10.01,10.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1024,SEG_MAX,structural_steps,steps/query,10.01,10.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1024,FEN_B,structural_steps,steps/query,11.00,11.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=65536,ORACLE,structural_steps,steps/query,65536.00,65536.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=65536,SEG_MC,structural_steps,steps/query,16.02,16.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=65536,SEG_MAX,structural_steps,steps/query,16.02,16.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=65536,FEN_B,structural_steps,steps/query,17.00,17.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1000000,ORACLE,structural_steps,steps/query,1000000.00,1000000.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1000000,SEG_MC,structural_steps,steps/query,7.00,7.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1000000,SEG_MAX,structural_steps,steps/query,7.00,7.00,1.00,ok,benchmark_width.txt
+20261117_082609Z,width,1000000,"world=1 calibration=2 query_starts=16,1024,65536,1000000 model_sample=12345",width=1000000,FEN_B,structural_steps,steps/query,26.00,26.00,1.00,ok,benchmark_width.txt
