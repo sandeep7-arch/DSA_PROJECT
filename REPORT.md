@@ -1,9 +1,9 @@
 # Project 5 Report
 
-**Team members:** ______________________________  
+**Team members:** Pranjali,Vinod,Sandeep,Kushaal,Chahak Dhote,Shrawani. 
 **Run recorded:** 2026-11-17 05:37:26 UTC  
-**Machine / OS:** ______________________________  
-**Compiler version:** ______________________________ (`g++ -std=c++17 -O2`)
+**Machine / OS:** LINUX , i7 13350h
+**Compiler version:** g++ -std=c++17 -O2`
 
 ## Design decisions
 
