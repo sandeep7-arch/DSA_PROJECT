@@ -7,11 +7,10 @@ struct MaxCount {
     struct T { i64 v; i64 c; };
     using In = i64;
     static T id() { return {NEG, 0}; }
-    static T leaf(In x) {hj }
+    static T leaf(In x) { return {x, 1}; }
     static T op(const T& a, const T& b, Stats&) {
         if (a.v > b.v) return a;
         if (b.v > a.v) return b;
-
         return {a.v, a.c + b.c};
     }
 };
@@ -54,7 +53,7 @@ public:
         for (size_t i = 0; i < n; ++i) t[N + i] = M::leaf(a[i]);
         for (size_t i = N - 1; i >= 1; --i) t[i] = comb(t[2 * i], t[2 * i + 1]);
         st.reset();
-    };
+    }
 
     T query(size_t l, size_t r) {
         requireRange(l, r, n);
