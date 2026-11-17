@@ -1,16 +1,16 @@
-# timestamp=20261117_082609Z
+# timestamp=20261117_091913Z
 # mode=mix
 # n=1000000
 # seeds=world=2 calibration=3 operations=5
 
 [benchmark] update mix (every update is a decrease), width 1024
   u        SEG_MAX ns/op  FEN_B ns/op  ORACLE ns/op   B<SEG steps  B<SEG time
-  0.0000           99.9         40.7         159.7   no           yes
-  0.0005           99.6         40.3         162.4   no           yes
-  0.0100           97.6         59.9         157.4   no           yes
-  0.1000          100.8        153.1         147.4   no           no
-  0.5000          123.2        517.5          99.1   no           no
-  1.0000          122.3        928.5          14.5   no           no
+  0.0000           99.8         40.6         165.0   no           yes
+  0.0005           98.4         41.8         158.8   no           yes
+  0.0100           98.7         60.1         157.9   no           yes
+  0.1000          105.5        155.8         147.8   no           no
+  0.5000          123.7        587.7          99.0   no           no
+  1.0000          128.9       1116.2          39.9   no           no
   predicted crossover: none, B never beats SEG_MAX in steps
   per-operation steps, predicted vs measured:
   case                                  predicted     measured   ratio

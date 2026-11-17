@@ -1,3 +1,4 @@
+
 #pragma once
 #include <algorithm>
 #include <numeric>
@@ -55,3 +56,4 @@ private:
     std::vector<i64> a;
     Stats st;
 };
+

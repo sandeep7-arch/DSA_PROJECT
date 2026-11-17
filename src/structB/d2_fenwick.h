@@ -1,8 +1,9 @@
+
 #pragma once
 #include <algorithm>
 #include <cassert>
 #include <vector>
-#include "common.h"
+#include "../common.h"
 
 class FenwickMax {
 public:
@@ -139,3 +140,4 @@ private:
     std::vector<i64> a, t;
     Stats st;
 };
+

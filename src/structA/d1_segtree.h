@@ -1,7 +1,8 @@
+
 #pragma once
 #include <utility>
 #include <vector>
-#include "common.h"
+#include "../common.h"
 
 struct MaxCount {
     struct T { i64 v; i64 c; };
@@ -13,6 +14,7 @@ struct MaxCount {
         if (b.v > a.v) return b;
         return {a.v, a.c + b.c};
     }
+    static bool equal(const T& a, const T& b) { return a.v == b.v && a.c == b.c; }
 };
 
 struct Max {
@@ -21,6 +23,7 @@ struct Max {
     static T id() { return NEG; }
     static T leaf(In x) { return x; }
     static T op(T a, T b, Stats&) { return a > b ? a : b; }
+    static bool equal(T a, T b) { return a == b; }
 };
 
 struct Gcd {
@@ -38,6 +41,7 @@ struct Gcd {
         }
         return a;
     }
+    static bool equal(T a, T b) { return a == b; }
 };
 
 template <class M>
@@ -78,6 +82,15 @@ public:
     const Stats& stats() const { return st; }
     void resetStats() { st.reset(); }
 
+    bool validate() const {
+        Stats ignored;
+        for (size_t p = 1; p < N; ++p) {
+            T expected = M::op(t[2 * p], t[2 * p + 1], ignored);
+            if (!M::equal(t[p], expected)) return false;
+        }
+        return true;
+    }
+
 private:
     T comb(const T& a, const T& b) {
         ++st.combines;
@@ -88,3 +101,4 @@ private:
     std::vector<T> t;
     Stats st;
 };
+

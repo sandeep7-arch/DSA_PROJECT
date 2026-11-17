@@ -1,10 +1,12 @@
+
 #pragma once
 #include <algorithm>
 #include <random>
 #include <vector>
-#include "common.h"
-#include "d1_segtree.h"
-#include "oracle.h"
+#include "../src/common.h"
+#include "../src/structA/d1_segtree.h"
+#include "../src/structB/d2_fenwick.h"
+#include "../oracle/oracle.h"
 
 struct Report {
     i64 max;
@@ -25,14 +27,23 @@ struct Event {
 class SensorReplay {
 public:
     SensorReplay(const std::vector<i64>& readings, const std::vector<i64>& calibration)
-        : maxc(readings), gcdt(calibration) {}
+        : maxc(readings), maxFenwick(readings), gcdt(calibration) {
+        if (readings.size() != calibration.size())
+            throw std::invalid_argument("readings and calibration arrays must have equal lengths");
+    }
 
     Report ask(size_t l, size_t r) {
         auto m = maxc.query(l, r);
-        return {m.v, m.c, gcdt.query(l, r)};
+        const i64 fenwickMax = maxFenwick.query(l, r);
+        if (fenwickMax != m.v)
+            throw std::logic_error("segment tree and Fenwick maximum disagree");
+        return {fenwickMax, m.c, gcdt.query(l, r)};
     }
 
-    void setReading(size_t i, i64 x) { maxc.assign(i, x); }
+    void setReading(size_t i, i64 x) {
+        maxc.assign(i, x);
+        maxFenwick.assign(i, x);
+    }
     void setCalibration(size_t i, i64 x) { gcdt.assign(i, x); }
 
     std::vector<Report> run(const std::vector<Event>& log) {
@@ -40,32 +51,37 @@ public:
         for (const auto& e : log) {
             if (e.kind == Event::Reading) setReading(e.i, e.x);
             else if (e.kind == Event::Calibration) setCalibration(e.i, e.x);
-            else out.push_back(ask(e.l, e.r));
+            else if (e.kind == Event::Query) out.push_back(ask(e.l, e.r));
+            else throw std::invalid_argument("unknown event kind");
         }
         return out;
     }
 
     const Stats& readingStats() const { return maxc.stats(); }
     const Stats& calibrationStats() const { return gcdt.stats(); }
-    void resetStats() { maxc.resetStats(); gcdt.resetStats(); }
+    void resetStats() { maxc.resetStats(); maxFenwick.resetStats(); gcdt.resetStats(); }
+    bool validate() const { return maxc.validate() && maxFenwick.validate() && gcdt.validate(); }
 
 private:
     SegTree<MaxCount> maxc;
+    FenwickMax maxFenwick;
     SegTree<Gcd> gcdt;
 };
 
 inline std::vector<Report> replayOracle(const std::vector<i64>& readings,
                                         const std::vector<i64>& calibration,
                                         const std::vector<Event>& log) {
+    if (readings.size() != calibration.size())
+        throw std::invalid_argument("readings and calibration arrays must have equal lengths");
     Oracle ro(readings), co(calibration);
     std::vector<Report> out;
     for (const auto& e : log) {
         if (e.kind == Event::Reading) ro.assign(e.i, e.x);
         else if (e.kind == Event::Calibration) co.assign(e.i, e.x);
-        else {
+        else if (e.kind == Event::Query) {
             auto m = ro.maxCount(e.l, e.r);
             out.push_back({m.v, m.c, co.gcd(e.l, e.r)});
-        }
+        } else throw std::invalid_argument("unknown event kind");
     }
     return out;
 }
@@ -92,3 +108,4 @@ inline std::vector<Event> makeLog(size_t n, size_t ops, double updateFraction, s
     }
     return log;
 }
+
