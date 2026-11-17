@@ -116,7 +116,7 @@ The `worstQueries` generator searches maximum-step ranges across all valid range
 
 ## Figures
 
-Generated from `results/raw/measurements.csv` by `results/make_figures.py`:
+Generated from `results/raw/*.csv` by `results/make_figures.py`:
 
 ![Mixed workload time per operation by update fraction](results/figures/update_mix_timings.svg)
 
