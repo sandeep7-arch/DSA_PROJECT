@@ -63,9 +63,9 @@ inline std::vector<Query> worstQueries(size_t n, size_t count) {
     int kmax = 63 - __builtin_clzll((uint64_t)N);
     i64 lo = 1LL << kmax;
     int best = 0;
-    for (i64 L = 1; L <= 8; ++L)
+    for (i64 L = 1; L <= N; ++L)
         for (i64 R = std::max(lo, L); R <= N; ++R) best = std::max(best, fenbQuerySteps(L, R));
-        for (i64 L = 1; L <= 8 && out.size() < count; ++L)
+        for (i64 L = 1; L <= N && out.size() < count; ++L)
             for (i64 R = std::max(lo, L); R <= N && out.size() < count; ++R)
                 if (fenbQuerySteps(L, R) == best) out.push_back({(size_t)(L - 1), (size_t)(R - 1)});
                 return out;
