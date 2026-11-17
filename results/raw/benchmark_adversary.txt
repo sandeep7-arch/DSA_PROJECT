@@ -1,0 +1,17 @@
+# timestamp=20261117_053726Z
+# mode=adversary
+# n=1000000
+# seeds=world=3 calibration=4 workloads=deterministic
+
+[benchmark] adversarial inputs
+  case                                  predicted     measured   ratio
+  SEG_MC same sequence steps/op             20.00        20.00    1.00  ok
+  FEN_P max-killer steps/op            1000010.50   1000010.29    1.00  ok
+  FEN_P max-killer rebuilds                100.00       100.00    1.00  ok
+  SEG_MC max-killer steps/op                20.00        20.00    1.00  ok
+  case                                        bound worst seen    slack
+  FEN_B worst decreases steps/op             211.00     211.00     0.00  ok
+  FEN_B worst query steps                     39.00      38.00     1.00  ok
+  SEG_MC same queries steps                   40.00      19.00    21.00  ok
+
+all predictions within tolerance, all bounds held

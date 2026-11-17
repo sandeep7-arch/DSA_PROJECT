@@ -1,0 +1,6 @@
+# timestamp=20261117_053726Z
+# mode=all
+# n=1000000
+# seed=1
+[full-scale] n=1000000 operations=1000000 data_seed=1 event_seed=2: segment tree application and Fenwick range max match oracle
+[self-test] monoids, invariants, guards, differential replay, and full-scale checks passed
